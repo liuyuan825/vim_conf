@@ -8,14 +8,11 @@ return require('packer').startup(function(use)
      -- Packer can manage itself
      use 'wbthomason/packer.nvim'
 
+     --[[
      use({'jakewvincent/mkdnflow.nvim',
         rocks = 'luautf8',
-        config = function()
-           require('mkdnflow').setup({
-               -- Config goes here; leave blank for defaults
-           })
-        end
       })
+     --]]
 
     -- feline
     use { 'feline-nvim/feline.nvim', branch = '0.5-compat' }
@@ -44,11 +41,11 @@ return require('packer').startup(function(use)
     } 
 
     -- markdown image
-    use 'ekickx/clipboard-image.nvim'
+    -- use 'ekickx/clipboard-image.nvim'
 
     use 'nanozuki/tabby.nvim'
     
-    use 'ggandor/leap.nvim'
+    -- use 'ggandor/leap.nvim'
 
     use {
         'sudormrfbin/cheatsheet.nvim',
@@ -59,6 +56,7 @@ return require('packer').startup(function(use)
           {'nvim-lua/plenary.nvim'},
         }
     }
+    --[[
     use {
         'phaazon/hop.nvim',
         branch = 'v2', -- optional but strongly recommended
@@ -67,6 +65,7 @@ return require('packer').startup(function(use)
             require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
         end
     }
+    --]]
 
     use {
         "windwp/nvim-autopairs",

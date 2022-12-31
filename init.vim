@@ -11,6 +11,13 @@ set cursorline
 
 set nu
 
+" { Copilot settings
+    " turn off tab completion
+    imap <silent><script><expr> <C-I> copilot#Accept("\<CR>")
+    let g:copilot_no_tab_map = v:true
+" }
+
+
 " Key (re)Mappings {
     " set <leader> to comma
     let mapleader = ","
@@ -96,15 +103,83 @@ set nu
     colorscheme carbonfox
     lua require('user.ui.feline')
     lua require('user.ui.tabby')
-    lua require('clipboard_image_conf')
-    lua require('hop').setup()
-    lua require('leap').add_default_mappings()
     lua require('nvim-autopairs').setup()
     lua require('mini.cursorword').setup() 
     " nvim-tree configs
     lua require("nvim-tree").setup()
     nnoremap <leader>e <cmd>NvimTreeToggle<cr>
 
+    " lua require('clipboard_image_conf')
+    " lua require('hop').setup()
+    " lua require('leap').add_default_mappings()
     " CoC-pyright is good enough
     " lua require'lspconfig'.pyright.setup{}
+" }
+
+
+" { Vundle configs 
+
+    set nocompatible               " be improved, required
+    filetype off                   " required
+    " set the runtime path to include Vundle and initialize
+    set rtp+=~/.config/nvim/bundle/Vundle.vim
+    call vundle#begin('~/.config/nvim/bundle')            " required
+    Plugin 'VundleVim/Vundle.vim'  " required
+
+    " ===================
+    " my plugins here
+    " ===================
+
+    " Track the engine.
+    " Plugin 'SirVer/ultisnips'
+
+    " Snippets are separated from the engine. Add this if you want them:
+    Plugin 'honza/vim-snippets'
+    " Plugin 'Shougo/deoplete.nvim'
+
+    " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+    " - https://github.com/Valloric/YouCompleteMe
+    " - https://github.com/nvim-lua/completion-nvim
+    " let g:UltiSnipsExpandTrigger="<tab>"
+    " let g:UltiSnipsJumpForwardTrigger="<c-h>"
+    " let g:UltiSnipsJumpBackwardTrigger="<c-l>"
+
+    " Use <C-l> for trigger snippet expand.
+    imap <C-l> <Plug>(coc-snippets-expand)
+
+    " Use <C-j> for select text for visual placeholder of snippet.
+    vmap <C-j> <Plug>(coc-snippets-select)
+
+    " Use <C-j> for jump to next placeholder, it's default of coc.nvim
+    let g:coc_snippet_next = '<c-j>'
+
+    " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+    let g:coc_snippet_prev = '<c-k>'
+
+    " Use <C-j> for both expand and jump (make expand higher priority.)
+    imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+    " Use <leader>x for convert visual selected code to snippet
+    xmap <leader>x  <Plug>(coc-convert-snippet)
+
+    inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
+
+    function! CheckBackspace() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    let g:coc_snippet_next = '<tab>'
+
+
+    " ===================
+    " end of plugins
+    " ===================
+    call vundle#end()               " required
+    filetype plugin indent on       " required
+
 " }
