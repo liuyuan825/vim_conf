@@ -9,6 +9,10 @@ set autochdir
 set encoding=UTF-8
 set cursorline
 
+autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType c,cpp setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab cc=80
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab cc=88
+
 set nu
 
 " { Copilot settings
@@ -135,7 +139,11 @@ set nu
 
     " Snippets are separated from the engine. Add this if you want them:
     Plugin 'honza/vim-snippets'
+    " Plugin 'liuchengxu/vista.vim'
+    " nnoremap <silent> <leader>t :Vista coc<CR>
     " Plugin 'Shougo/deoplete.nvim'
+    Plugin 'preservim/tagbar'
+    nnoremap <silent> <leader>t :TagbarToggle<CR>
 
     " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
     " - https://github.com/Valloric/YouCompleteMe
@@ -151,10 +159,10 @@ set nu
     vmap <C-j> <Plug>(coc-snippets-select)
 
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
-    let g:coc_snippet_next = '<c-j>'
+    let g:coc_snippet_next = '<C-J>'
 
     " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-    let g:coc_snippet_prev = '<c-k>'
+    let g:coc_snippet_prev = '<C-K>'
 
     " Use <C-j> for both expand and jump (make expand higher priority.)
     imap <C-j> <Plug>(coc-snippets-expand-jump)
